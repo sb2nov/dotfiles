@@ -37,6 +37,7 @@ brew install wget --with-iri
 
 # Install other useful binaries.
 brew install git
+brew install git-lfs
 brew install tree
 
 # Remove outdated versions from the cellar.

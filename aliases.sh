@@ -16,6 +16,7 @@ alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgree
 alias glg="gl --graph"
 
 # Silver Searcher
+alias agg='ag --go'
 alias agj='ag --js'
 alias agp='ag --python'
 

@@ -1,0 +1,15 @@
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[url "ssh://git@github.com"]
+	insteadOf = https://github.com
+
+# Set up VSCode as the diff tool.
+[diff]
+  tool = default-difftool
+[difftool "default-difftool"]
+  cmd = code -n --wait --diff $LOCAL $REMOTE
+[core]
+	excludesfile = /Users/sourabhbajaj/.gitignore

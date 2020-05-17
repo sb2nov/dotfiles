@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # FileSearch
 function f() { find . -iname "*$1*" ${@:2} }
 function r() { grep "$1" ${@:2} -R . }
@@ -38,4 +40,16 @@ function server() {
 	# Set the default Content-Type to `text/plain` instead of `application/octet-stream`
 	# And serve everything as UTF-8 (although not technically correct, this doesn’t break anything for binary files)
 	python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port";
+}
+
+
+# Listening
+function listening() {
+    if [ $# -eq 0 ]; then
+        sudo lsof -iTCP -sTCP:LISTEN -n -P
+    elif [ $# -eq 1 ]; then
+        sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
+    else
+        echo "Usage: listening [pattern]"
+    fi
 }
