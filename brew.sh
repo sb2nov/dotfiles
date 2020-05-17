@@ -64,6 +64,3 @@ brew install kubernetes-cli
 brew cask install slack
 brew cask install typora
 brew cask install zoomus
-
-# Paid apps
-brew cask install cisdem-pdftoolkit

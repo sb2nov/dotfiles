@@ -11,5 +11,3 @@
   tool = default-difftool
 [difftool "default-difftool"]
   cmd = code -n --wait --diff $LOCAL $REMOTE
-[core]
-	excludesfile = /Users/sourabhbajaj/.gitignore
