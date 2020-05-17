@@ -1,2 +1,3 @@
 # dotfiles
-Dotfiles to be shared across machines
+
+Personal configuration files that are shared across machines with useful helper functions. 
