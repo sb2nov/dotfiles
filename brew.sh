@@ -26,16 +26,8 @@ brew install gnu-sed
 brew install bash
 brew install bash-completion2
 
-# Switch to using brew-installed bash as default shell
-if ! fgrep -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
-  echo "${BREW_PREFIX}/bin/bash" | sudo tee -a /etc/shells;
-  chsh -s "${BREW_PREFIX}/bin/bash";
-fi;
-
-# Install `wget` with IRI support.
-brew install wget --with-iri
-
 # Install other useful binaries.
+brew install wget
 brew install git
 brew install git-lfs
 brew install tree
@@ -44,8 +36,9 @@ brew install tree
 brew cleanup
 
 # Install more recent versions of some macOS tools.
-brew install vim --with-override-system-vi
+brew install vim
 brew install grep
+brew install base64
 
 # Basic Functionality
 brew cask install rectangle
@@ -64,7 +57,8 @@ brew cask install sublime-text
 brew cask install docker
 brew cask install visual-studio-code
 brew cask install jupyter-notebook-viewer
-brew cask install dshb
+brew install dshb
+brew install kubernetes-cli
 
 # Work
 brew cask install slack

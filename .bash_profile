@@ -1,9 +1,13 @@
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
+# Owner
+export USER_NAME="Sourabh"
+export DOTDIR="$HOME/Projects/dotfiles"
+
 # Git completions need to be installed separately since we use the default git instead of homebrew git.
 # curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
-[[ -r "$HOME/.git-completion.bash" ]] && source "$HOME/.git-completion.bash"
-[[ -r "$HOME/.kubectl-completion.bash" ]] && source "$HOME/.kubectl-completion.bash"
+[[ -r "$DOTDIR/.git-completion.bash" ]] && source "$DOTDIR/.git-completion.bash"
+[[ -r "$DOTDIR/.kubectl-completion.bash" ]] && source "$DOTDIR/.kubectl-completion.bash"
 
 # Color LS
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
@@ -96,16 +100,10 @@ function parse_git_dirty {
 
 # get current kube cluster
 function parse_kube_cluster() {
-	REGION=`kubectl config current-context 2> /dev/null | cut -d':' -f 4`
-	CLUSTER=`kubectl config current-context 2> /dev/null | cut -d'/' -f 2`
+	CLUSTER=`kubectl config current-context 2> /dev/null`
 	if [ ! "${CLUSTER}" == "" ]
 	then
-		if [ "${CLUSTER}" == "docker-desktop" ]
-		then 
-			echo "[${CLUSTER}]"
-		else
-			echo "[${CLUSTER}:${REGION}]"
-		fi
+		echo "[${CLUSTER}]"
 	else
 		echo ""
 	fi
@@ -134,31 +132,11 @@ source $HOME/.iterm2_shell_integration.bash
 iterm2_print_user_vars() {
 	iterm2_set_user_var kubeNamespace "Namespace: $NAMESPACE"
 
-	REGION=`kubectl config current-context 2> /dev/null | cut -d':' -f 4`
-	CLUSTER=`kubectl config current-context 2> /dev/null | cut -d'/' -f 2`
+	CLUSTER=`kubectl config current-context 2> /dev/null`
 	if [ ! "${CLUSTER}" == "" ]
 	then
-		if [ "${CLUSTER}" == "docker-desktop" ]
-		then 
-			iterm2_set_user_var kubeCluster "Cluster: ${CLUSTER}"
-		else
-			iterm2_set_user_var kubeCluster "Cluster: ${CLUSTER}:${REGION}"
-		fi
+		iterm2_set_user_var kubeCluster "Cluster: ${CLUSTER}"
 	else
 		iterm2_set_user_var kubeCluster "Cluster: "
-	fi
-
-	AWS_ASSUMED_IDENTITY=`echo $NEEVA_PRODACCESS_AWS_ASSUME_ROLE_ARN | cut -d'/' -f 2`
-	AWS_USER_IDENTITY=`echo $NEEVA_PRODACCESS_AWS_USER_ROLE_ARN | cut -d'/' -f 3`
-	if [ ! "${AWS_ACCESS_KEY_ID}" == "" ]
-	then
-		if [ ! "${AWS_ASSUMED_IDENTITY}" == "" ]
-		then
-			iterm2_set_user_var awsIdentity "AWSRole: $AWS_ASSUMED_IDENTITY"
-		else
-			iterm2_set_user_var awsIdentity "AWSRole: $AWS_USER_IDENTITY"
-		fi
-	else
-		iterm2_set_user_var awsIdentity "AWSRole: "
 	fi
 }
