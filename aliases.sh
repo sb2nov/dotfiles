@@ -1,9 +1,9 @@
 # Aliases
 
-alias pjt='cd ~/Projects'
+alias pj='cd ~/Projects'
 
 # Git
-alias gd='git diff'
+alias gd='git diff HEAD'
 alias ga='git add --all'
 alias gca='git commit --amend'
 alias gac='ga && gca'
