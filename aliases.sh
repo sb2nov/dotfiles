@@ -14,6 +14,7 @@ alias gcm='git checkout master'
 alias gp='git pull'
 alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -10"
 alias glg="gl --graph"
+alias gps="git push -u origin HEAD"
 
 # Silver Searcher
 alias agg='ag --go'
